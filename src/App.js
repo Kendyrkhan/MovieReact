@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"; 
+import './bootstrap-4.6.0-dist/css/bootstrap.min.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,Redirect
+} from "react-router-dom";
+
+import  { useContext } from "react"; 
+
+import UserProvider from './Components/UserProvider';
+
+import Admin from './Components/admin/Admin';
+import Main from './Components/Main';
+
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+ <>
+
+
+
+      <UserProvider>
+        <Router>
+          <Switch>
+        
+            <Route  path="/adminMain">
+                <Admin/>
+            </Route>
+
+            <Route  path="/main">
+                <Main/>
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/main/home" />
+            </Route>
+            
+          </Switch>
+        </Router>
+      </UserProvider>
+
+    </>
   );
 }
 
